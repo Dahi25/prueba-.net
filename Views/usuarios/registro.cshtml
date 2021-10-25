@@ -1,56 +1,251 @@
-﻿@model PruebaDahiana.Models.Usuario
+@model PruebaDahiana.Models.Usuario
+
+
+@*if (resultado == true) {*@
 
 @{
     ViewBag.Title = "registro";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div style="width: 100%;">
+    <h1 class="text-white"> Bienvenidos a: </h1>
+</div>
+<div class="d-flex">
 
-<h1>Bienvenidos</h1>
-
-
-@using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-horizontal">
-            <h4>Usuario</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.Cedula, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Cedula, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Cedula, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Cargo, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Cargo, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Cargo, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Empresa, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Empresa, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Empresa, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Crear" class="btn btn-warning"/>
-                </div>
-            </div>
+    
         </div>
+            <style>
+                .error {
+                    color: red;
+                }
+
+                input[type="checkbox"] { /* change "blue" browser chrome to yellow */
+                    filter: invert(35%) hue-rotate(250deg) brightness(1.0);
+                }
+
+                .label {
+                    align-items: center;
+                }
+
+                .form-control {
+                    width: 700px;
+                }
+
+                .btn-warning {
+                    width: 100px;
+                }
+          </style>
+
+            @using (Html.BeginForm("", "", FormMethod.Post, new { name = "formulario", id = "formulario" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <h4 class="text-white">Servicios principales Compurent</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="d-flex">
+                        <div>
+                            <div class=" test">
+                                @Html.LabelFor(model => model.Cedula, htmlAttributes: new { @class = "test text-white" })
+                                <div class="">
+                                    @Html.EditorFor(model => model.Cedula, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Cedula, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class=" test">
+                                @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = " test  text-white" })
+                                <div class="">
+                                    @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control text-white" } })
+                                    @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger " })
+                                </div>
+                            </div>
+
+                            <div class=" test">
+                                @Html.LabelFor(model => model.Cargo, htmlAttributes: new { @class = " test  text-white" })
+                                <div class="">
+                                    @Html.EditorFor(model => model.Cargo, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Cargo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class=" test">
+                                @Html.LabelFor(model => model.Empresa, htmlAttributes: new { @class = " test  text-white" })
+                                <div class="">
+                                    @Html.EditorFor(model => model.Empresa, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Empresa, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-check  text-white">
+                            <div>
+                                @Html.Label("Seleccione el servicio que desea obtener:")
+                                <div>
+                                    <div class="d-flex  flex-column ">
+                                        @Html.Label("Licenciamiento de office 365 ")
+                                        @Html.CheckBoxFor(m => m.licenciamiento, new { id = "1" })
+                                    </div>
+                                    <div class="d-flex  flex-column">
+                                        @Html.Label("Licenciamiento de Azure ")
+                                        @Html.CheckBoxFor(m => m.azure, new { id = "2" })
+                                    </div>
+                                    <div class="d-flex  flex-column">
+                                        @Html.Label("Renting tecnológico  ")
+                                        @Html.CheckBoxFor(m => m.renting, new { id = "3" })
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class=" test">
+                                @Html.Label("¿ Desea obtener más información ? ")
+                                <div class="">
+                                    @Html.RadioButtonFor(model => model.Opcion, true)@Html.Label("si")
+                                    @Html.RadioButtonFor(model => model.Opcion, false)@Html.Label("no")
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class=" d-flex  mt-5">
+
+                    <input type="button" value="Crear" onclick="Registrar()" class="btn btn-warning" />
+
+                    <input type="button" value="Actualizar" onclick="Actualizar()" class="btn btn-warning mx-5" />
+
+                    <input type="button" value="ELiminar" onclick="Eliminar()" class="btn btn-warning" />
+
+                </div>
+
+
+            }
+            <script>
+    $(document).ready(function () {
+        $('#formulario').submit(function (e) {
+            e.preventDefault()
+        }).validate({
+            debug: false,
+            errorClass: "error",
+            rules: {
+                Cedula: { required: true },
+                Nombre: { required: true },
+                Cargo: { required: true },
+                Empresa: { required: true },
+
+                messages: {
+                    Cedula: {
+                        required: "Ingrese porfavor su cedula"
+                    },
+                    Nombre: {
+                        required: "Ingrese su  nombre  con apellidos"
+                    },
+                    Cargo: {
+                        required: "Ingrese el cargo que desempeña actualmente"
+                    },
+                    Empresa: {
+                        required: "Ingrese el nombre de la empresa donde trabaja"
+                    },
+                    Opcion: {
+                        required: "Porfavor  elija  una opción"
+                    },
+
+                }
+            },
+        });
+    });
+    function Registrar() {
+        if ($("#formulario").valid()) {
+            var lic = document.getElementById('1').checked;
+            if (lic == true) {
+                $("#1").val(true);
+            }
+            else {
+                $("#1").val(false);
+            }
+                var azur = document.getElementById('2').checked;
+                if (azur == true) {
+                    $("#2").val(true);
+                }
+                else {
+                    $("#2").val(false);
+                }
+            var azur = document.getElementById('3').checked;
+            if (azur == true) {
+                $("#3").val(true);
+            }
+            else {
+                $("#3").val(false);
+            }
+            var formulario = $("#formulario").serialize();
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("RegistrarDatos", "Usuarios")',
+                data: formulario,
+                success: function (resultado) {
+                    swal({
+                        type: 'success',
+                        title: 'Estimado Usuario',
+                        text: 'Datos almacenados  con éxito',
+                        confirmButtonColor: '#7E8A97'
+                    }).then(function () {
+                        location.reload();
+                    });
+                }
+            });
+        }
     }
+
+        /*funcion para actualizar los datos*/
+         function Actualizar() {
+        if ($("#formulario").valid()) {
+            var formulario = $("#formulario").serialize();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("ActualizarDatos", "Usuarios")',
+                data: formulario,
+                success: function (resultado) {
+                    if (resultado == true) {
+                        swal({
+                            type: 'success',
+                            title: 'Estimado Usuario',
+                            text: 'Sus datos fueron actualizados correctamente',
+                            confirmButtonColor: '#7E8A97'
+                        }).then(function () {
+                            location.reload();
+                        });
+                    }
+                }
+            });
+        }
+    }
+
+     /*funcion para actualizar los datos*/
+         function Eliminar() {
+        if ($("#formulario").valid()) {
+            var formulario = $("#formulario").serialize();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("EliminarDatos", "Usuarios")',
+                data: formulario,
+                success: function (resultado) {
+                    if (resultado == true) {
+                        swal({
+                            type: 'success',
+                            title: 'Estimado Usuario',
+                            text: 'Sus datos fueron  eliminados correctamente',
+                            confirmButtonColor: '#7E8A97'
+                        }).then(function () {
+                            location.reload();
+                        });
+                    }
+                }
+            });
+        }
+    }
+
+</script>

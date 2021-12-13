@@ -1,0 +1,219 @@
+﻿@model Prueba.Models.Usuario
+
+@{
+    ViewBag.Title = "Garantía";
+
+}
+<div style="width: 100%;">
+    <h1 class="text-white"> Solicita tus  garantías: </h1>
+</div>
+@*<div class="d-flex">
+    </div>*@
+<style>
+    .label {
+        align-items: center;
+    }
+</style>
+@using (Html.BeginForm("", "", FormMethod.Post, new { name = "formulario1", id = "formulario1" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div>
+            <div class=" test">
+                @Html.LabelFor(model => model.Cedula, htmlAttributes: new { @class = "test text-white" })
+                <div class="">
+                    @Html.EditorFor(model => model.Cedula, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Cedula, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class=" test mt-5">
+                @*da espacios  *@
+                @Html.TextAreaFor(model => model.falla, htmlAttributes: new { @class = " test " })
+
+
+                <div class="">
+                    @*  @Html.EditorFor(model => model.falla, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.ValidationMessageFor(model => model.falla, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="form-check  text-white">
+            <div>
+                @Html.Label("Seleccione el servicio  que necesita garantía:")
+                <div>
+                    <div class="d-flex  flex-column ">
+                        @Html.Label("Licenciamiento de office 365 ")
+                        @Html.CheckBoxFor(m => m.licenciamiento, new { id = "1" })
+                    </div>
+                    <div class="d-flex  flex-column">
+                        @Html.Label("Licenciamiento de Azure ")
+                        @Html.CheckBoxFor(m => m.azure, new { id = "2" })
+                    </div>
+                    <div class="d-flex  flex-column">
+                        @Html.Label("Renting tecnológico  ")
+                        @Html.CheckBoxFor(m => m.renting, new { id = "3" })
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div>
+        <input type="button" value="Enviar" onclick="EnviarFormulario();" id="envio" class="btn btn-warning" />
+    </div>
+    <div>
+    <input type="button" value="Eliminar Solicitud" onclick="EliminarSolicitud()" id="eliminarS" class="btn btn-warning" />
+     </div>
+}
+<h1><b> Si eres una persona natural , puedes solicitar tus grantias aca:</b></h1>
+<div class="productos">
+     <div class="card-body">
+        <h2 class="card-title">Lenovo CES 2021 </h2>
+        <p class="card-text"> Computadora 2 en 1 ,ideal para empresas ,incluye conexion 5G </p>
+        <img src="~/Content/imagenes/lenovo-CES-2021.png" class="img-fluid" alt="lenovo ces 2021" />
+        <input type="button" value="Solicitar" onclick="SOlicitarProducto();" id="solicitar" class="btn btn-warning" />
+    </div>
+
+    <div class="card-body">
+        <h2 class="card-title">Licenciamiento office</h2>
+        <p class="card-text">
+            Podras pedir el
+            soporte sobre tu licencia office 365
+        </p>
+        <img src="~/Content/imagenes/licencia-365.jpg" class="img-fluid" alt="licencia office 365" />
+        <input type="button" value="Solicitar" onclick="SOlicitarProducto();" id="solicitar" class="btn btn-warning" />
+    </div>
+
+    <div class="card-body">
+        <h2 class="card-title">Thinkpad Carbonx1-gen9</h2>
+
+        <p class="card-text">Procesor hasta  intel i7,bateria de larga duraciòn ,ideal para trabajar</p>
+        <img src="~/Content/imagenes/lenovo-carbonx1-gen9.jpg" class="img-fluid" alt="lenovo carbonx1 gen 9" />
+        <input type="button" value="Solicitar" onclick="SOlicitarProducto();" id="solicitar" class="btn btn-warning" />
+    </div>
+
+    <div class="card-body">
+        <h2 class="card-title">Lenovo yoga slim7</h2>
+        <p class="card-text">Sistema operativo windows 10 home,teclado retroiluminado,Memoria ram 8GB</p>
+        <img src="~/Content/imagenes/lenovo-yoga-slim7.jpg" class="img-fluid" alt="lenovo yoga slim7" />
+        <input type="button" value="Solicitar" onclick="SOlicitarProducto();" id="solicitar" class="btn btn-warning" />
+    </div>
+
+    <div class="card-body">
+        <h2 class="card-title">Idea center i3 </h2>
+        <p class="card-text"> Procesadores hasta Intel® Core™ i5 de 10ma generación,pantalla táctil , excelente almacenamiento </p>
+        <div>
+            <img src="~/Content/imagenes/idea-center i3.jpg" class="img-fluid" alt="idea center i3" />
+        </div>
+        <input type="button" value="Solicitar" onclick="SOlicitarProducto();" id="solicitar" class="btn btn-warning" />
+    </div>
+    <div class="card-body">
+        <h2 class="card-title">Licenciamiento azure</h2>
+        <p class="card-text"> No dejes que los cibercriminales  roben tu informacion , refuerza la seguridad en la nube </p>
+        <div>
+            <img src="~/Content/imagenes/licenciamiento-azure.png" class="img-fluid" alt="licenciamiento azure" />
+        </div>
+        <input type="button" value="Solicitar" onclick="SOlicitarProducto();" id="solicitar" class="btn btn-warning" />
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#formulario1').submit(function (e) {
+            e.preventDefault()
+        }).validate({
+            debug: false,
+            errorClass: "error nuevo",
+            rules: {
+                Cedula: { required: true },
+                falla: { required: true }
+                     messages: {
+                    Cedula: {
+                        required: "Ingrese porfavor su cedula"
+                    },
+                    falla: {
+                        required: "Describa las fallas que tiene su servicio"
+                    }
+                }
+            }
+        });
+    });
+
+</script>
+
+<script>
+    function EnviarFormulario() {
+        debugger;
+        if ($("#formulario1").valid()) {
+
+                var lic = document.getElementById('1').checked;
+                if (lic == true) {
+                    $("#1").val(true);
+                }
+                else {
+                    $("#1").val(false);
+                }
+                var azur = document.getElementById('2').checked;
+                if (azur == true) {
+                    $("#2").val(true);
+                }
+                else {
+                    $("#2").val(false);
+                }
+                var azur = document.getElementById('3').checked;
+                if (azur == true) {
+                    $("#3").val(true);
+                }
+                else {
+                    $("#3").val(false);
+                }
+            var formulario1 = $("#formulario1").serialize();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("EnviarSolicitud", "usuarios")',
+                data: formulario1,
+                success: function (resultado) {
+                    swal({
+                        type: 'success',
+                        title: 'Estimado Usuario',
+                        text: 'Su solicitud ha sido enviada',
+                        confirmButtonColor: '#7E8A97'
+                    }).then(function () {
+                        location.reload();
+                    });
+                }
+            });
+        }
+    }
+    function EliminarSolicitud() {
+        if ($("#formulario1").valid()) {
+            var formulario1 = $("#formulario1").serialize();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("EliminarSolicitud")',
+                data: formulario1,
+                success: function (resultado) {
+                    if (resultado == "True") {
+                        swal({
+                            type: 'success',
+                            title: 'Estimado Usuario',
+                            text: 'Su solicitud  fue eliminada correctamente',
+                            confirmButtonColor: '#7E8A97'
+                        }).then(function () {
+                            location.reload();
+                        });
+                    }
+                }
+            });
+        }
+    }
+   
+</script>

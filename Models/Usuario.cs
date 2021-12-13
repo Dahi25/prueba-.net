@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace PruebaDahiana.Models
+namespace Prueba.Models
 {
     public class Usuario
     {
@@ -11,6 +11,10 @@ namespace PruebaDahiana.Models
         public String Nombre { get; set; }
         public String Cargo { get; set; }
         public String Empresa { get; set; }
-
+        public Boolean licenciamiento { get; set; }
+        public Boolean azure { get; set; }
+        public Boolean renting { get; set; }
+        public String falla { get; set; }
+        public bool Opcion { get; set; }
     }
 }
